@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <script type="text/javascript" >
+      var objekts = {};
+      function init() {
+        let root = document.getElementById("root");
+        let div = document.createElement("DIV");
+        div.setAttribute("id", "object");
+        div.innerHTML = JSON.stringify(objekts);
+        root.appendChild(div);
+      }
+      function render() {
+        let div = document.getElementById("object");
+        div.innerHTML = JSON.stringify(objekts);
+      }
+      function pievienot() {
+        let key = document.getElementById("pievienot_atslega").value;
+        let value = document.getElementById("pievienot_vertiba").value;
+        if (!objekts[key] && key && value) {
+          objekts[key] = value;
+        }
+        render();
+      }
+      function nonemt() {
+        let key = document.getElementById("nonemt_atslega").value;
+        if (objekts[key]) {
+          delete objekts[key];
+        }
+        render();
+      }
+    </script>
+  </head>
+  <body onload="init()">
+    <div id="task">
+      <h1>Manipulācijas ar objektiem</h1>
+      <ol>
+        <li>Izveidot funkciju, kura pievienos jaunu atslēgu ar vērtību objektam</li>
+        <li>Izveidot funkciju, kura dzēsīs atslēgu (un tās vērtību) no objekta</li>
+        <li>Izveidot funkciju, kura izdrukās visas objekta atslēgas un to vērtības</li>
+      </ol>
+    </div>
+    <div id="root">
+      <div>
+        <p>Pievienot jaunu atslēgu un vērtību</p>
+        <input type="text" id="pievienot_atslega" placeholder="atslēga"/>
+        <input type="text" id="pievienot_vertiba" placeholder="vērtība"/>
+        <button onClick="pievienot()">Pievienot</button>
+      </div>
+      <div>
+          <p>Dzēst atslēgu un tās vērtību</p>
+          <input type="text" id="nonemt_atslega" placeholder="atslēga"/>
+          <button onClick="nonemt()">Noņemt</button>
+      </div>
+    </div>
+    <div id="info">
+      <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_new">MDN Objekti</a></li>
+        <li><a href="https://www.w3schools.com/js/js_objects.asp" target="_new">w3s Objekti</a></li>
+      </ul>
+    </div>
+  </body>
+</html>
