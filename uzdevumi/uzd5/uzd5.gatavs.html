@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <script type="text/javascript" >
+      class FormGenerator {
+        rowIndex = 0;
+
+        init() {
+          let root = document.getElementById("root");
+          let button = document.createElement("button");
+          let form = document.createElement("form");
+          let div = document.createElement("div");
+          button.setAttribute("onClick", "formGenerator.pievienotRindu()");
+          button.innerHTML = "Pievienot rindu";
+          form.setAttribute("id", "forma");
+          div.setAttribute("id", "objekts");
+          root.appendChild(button);
+          root.appendChild(form);
+          root.appendChild(div);
+        }
+
+        pievienotRindu() {
+          let form = document.getElementById("forma");
+          let div = document.createElement("div");
+          let input1 = document.createElement("input");
+          let input2 = document.createElement("input");
+          let btn = document.createElement("button");
+          this.setAttributes(div, {"id": "div-"+this.rowIndex});
+          this.setAttributes(input1, {"type": "text", "name": "atslega", "placeholder": "atslēga", "onchange": "formGenerator.render()"});
+          this.setAttributes(input2, {"type": "text", "name": "vertiba", "placeholder": "vertība", "onchange": "formGenerator.render()"});
+          this.setAttributes(btn, {"type": "button", "onclick": `formGenerator.nonemtRindu("div-${this.rowIndex}")`});
+          btn.innerHTML = "Noņemt rindu";
+          div.appendChild(input1);
+          div.appendChild(input2);
+          div.appendChild(btn);
+          form.appendChild(div);
+          this.render();
+          this.rowIndex++;
+        }
+
+        nonemtRindu(id) {
+          let div = document.getElementById(id);
+          div.remove();
+          this.render();
+        }
+
+        setAttributes(element, attrs) {
+          for(var key in attrs) {
+            element.setAttribute(key, attrs[key]);
+          }
+        }
+
+        render() {
+          let keys = Array.prototype.slice.call(document.getElementsByName("atslega"));
+          let values = Array.prototype.slice.call(document.getElementsByName("vertiba"));
+          let div = document.getElementById("objekts");
+          let object = {};
+          for (let i = 0; i < keys.length; i++) {
+            object[keys[i].value] = values[i].value;
+          }
+          div.innerHTML = JSON.stringify(object);
+        }
+      }
+      var formGenerator = new FormGenerator();
+    </script>
+  </head>
+  <body onload="formGenerator.init()">
+    <div id="task">
+      <h1>Darbības ar DOM elementiem</h1>
+      <ol>
+        <li>pārveidot 4 uzdevuma risinājumu tā, lai tas izmantotu klasi ar metodēm nevis vienkārši funkcijas</li>
+      </ol>
+    </div>
+    <div id="root">
+    </div>
+    <div id="info">
+      <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_new">MDN Objekti</a></li>
+        <li><a href="https://www.w3schools.com/js/js_objects.asp" target="_new">w3s Objekti</a></li>
+      </ul>
+    </div>
+  </body>
+</html>
