@@ -1,6 +1,9 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../styles.css">
     <script type="text/javascript" >
       var rowIndex = 0;
       function init() {
@@ -8,10 +11,10 @@
         let button = document.createElement("button");
         let form = document.createElement("form");
         let div = document.createElement("div");
-        button.setAttribute("onClick", "pievienotRindu()");
+        setAttributes(button, {"onClick": "pievienotRindu()", "class": "col-md-5 btn btn-success"});
         button.innerHTML = "Pievienot rindu";
         form.setAttribute("id", "forma");
-        div.setAttribute("id", "objekts");
+        div.setAttribute("id", "result");
         root.appendChild(button);
         root.appendChild(form);
         root.appendChild(div);
@@ -22,10 +25,10 @@
         let input1 = document.createElement("input");
         let input2 = document.createElement("input");
         let btn = document.createElement("button");
-        setAttributes(div, {"id": "div-"+rowIndex});
-        setAttributes(input1, {"type": "text", "name": "atslega", "placeholder": "atslēga", "onchange": "render()"});
-        setAttributes(input2, {"type": "text", "name": "vertiba", "placeholder": "vertība", "onchange": "render()"});
-        setAttributes(btn, {"type": "button", "onclick": `nonemtRindu("div-${rowIndex}")`});
+        setAttributes(div, {"id": "div-"+rowIndex, "class": "row justify-content-center"});
+        setAttributes(input1, {"type": "text", "name": "atslega", "placeholder": "atslēga", "onchange": "render()", "class":"col-md-4 form-control"});
+        setAttributes(input2, {"type": "text", "name": "vertiba", "placeholder": "vertība", "onchange": "render()", "class":"col-md-4 form-control"});
+        setAttributes(btn, {"type": "button", "onclick": `nonemtRindu("div-${rowIndex}")`, "class":"col-md-3 btn btn-danger"});
         btn.innerHTML = "Noņemt rindu";
         div.appendChild(input1);
         div.appendChild(input2);
@@ -47,7 +50,7 @@
       function render() {
         let keys = Array.prototype.slice.call(document.getElementsByName("atslega"));
         let values = Array.prototype.slice.call(document.getElementsByName("vertiba"));
-        let div = document.getElementById("objekts");
+        let div = document.getElementById("result");
         let object = {};
         for (let i = 0; i < keys.length; i++) {
           object[keys[i].value] = values[i].value;
@@ -56,7 +59,7 @@
       }
     </script>
   </head>
-  <body onload="init()">
+  <body class="container" onload="init()">
     <div id="task">
       <h1>Darbības ar DOM elementiem</h1>
       <ol>
@@ -70,10 +73,14 @@
     <div id="root">
     </div>
     <div id="info">
+      <h3>Noderīgas saites</h3>
       <ul>
         <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_new">MDN Objekti</a></li>
         <li><a href="https://www.w3schools.com/js/js_objects.asp" target="_new">w3s Objekti</a></li>
       </ul>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>

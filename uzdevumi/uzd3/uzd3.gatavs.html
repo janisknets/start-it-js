@@ -1,17 +1,20 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../styles.css">
     <script type="text/javascript" >
       var objekts = {};
       function init() {
         let root = document.getElementById("root");
         let div = document.createElement("DIV");
-        div.setAttribute("id", "object");
+        div.setAttribute("id", "result");
         div.innerHTML = JSON.stringify(objekts);
         root.appendChild(div);
       }
       function render() {
-        let div = document.getElementById("object");
+        let div = document.getElementById("result");
         div.innerHTML = JSON.stringify(objekts);
       }
       function pievienot() {
@@ -31,7 +34,7 @@
       }
     </script>
   </head>
-  <body onload="init()">
+  <body class="container" onload="init()">
     <div id="task">
       <h1>Manipulācijas ar objektiem</h1>
       <ol>
@@ -40,24 +43,28 @@
         <li>Izveidot funkciju, kura izdrukās visas objekta atslēgas un to vērtības</li>
       </ol>
     </div>
-    <div id="root">
-      <div>
-        <p>Pievienot jaunu atslēgu un vērtību</p>
-        <input type="text" id="pievienot_atslega" placeholder="atslēga"/>
-        <input type="text" id="pievienot_vertiba" placeholder="vērtība"/>
-        <button onClick="pievienot()">Pievienot</button>
+    <div id="root" class="row justify-content-center">
+      <div class="row justify-content-center">
+        <div class="col-sm-12 label">Pievienot jaunu atslēgu un vērtību</div>
+        <input class="col-md-4 form-control" id="pievienot_atslega" type="text" placeholder="atslēga"/>
+        <input class="col-md-4 form-control" id="pievienot_vertiba" type="text" placeholder="vērtība"/>
+        <button class="col-md-3 btn btn-success" onClick="pievienot()">Pievienot</button>
       </div>
-      <div>
-          <p>Dzēst atslēgu un tās vērtību</p>
-          <input type="text" id="nonemt_atslega" placeholder="atslēga"/>
-          <button onClick="nonemt()">Noņemt</button>
+      <div class="row justify-content-center">
+        <div class="col-sm-12 label">Dzēst atslēgu un tās vērtību</div>
+        <input class="col-md-8 form-control" id="nonemt_atslega" type="text" placeholder="atslēga"/>
+        <button class="col-md-3 btn btn-danger" onClick="nonemt()">Noņemt</button>
       </div>
     </div>
     <div id="info">
+      <h3>Noderīgas saites</h3>
       <ul>
         <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_new">MDN Objekti</a></li>
         <li><a href="https://www.w3schools.com/js/js_objects.asp" target="_new">w3s Objekti</a></li>
       </ul>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
