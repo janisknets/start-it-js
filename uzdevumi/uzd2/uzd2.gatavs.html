@@ -6,43 +6,44 @@
     <link rel="stylesheet" type="text/css" href="../../styles.css">
     <script type="text/javascript" >
       var masivs = [];
-      function init() {
-        let root = document.getElementById("root");
-        let div = document.createElement("DIV");
-        div.setAttribute("id", "result");
-        div.innerHTML = JSON.stringify(masivs);
-        root.appendChild(div);
+      function init() {                                   // Inicializācijas funkcija, kas pievieno root div elementam jaunu rezultātu div elementu
+        let root = document.getElementById("root");       // Atrod elementu, kuram id ir 'root' un pievieno to mainīgajam
+        let div = document.createElement("DIV");          // Izveido jaunu div elementu un piesaista to mainīgajam
+        div.setAttribute("id", "result");                 // Iepriekš izveidotajam div elementam pievieno id atribūtu 'result'
+        div.innerHTML = JSON.stringify(masivs);           // Iepriekš izveidotajā div elementā ievieto masīvu
+        root.appendChild(div);                            // Pievieno iepriekš izveidoto div elementu, iepriekš atrastajam 'root' elementam
       }
-      function pievienot() {
-        if (document.getElementById("pievienot_vertiba").value) {
-          masivs.push(document.getElementById("pievienot_vertiba").value);
-        }
-        render();
+      function pievienot() {                                                  // Vērtības pievienošanas masīva beigām funkcija
+        let value = document.getElementById("pievienot_vertiba").value;       // Atrod dokumentā elementu ar norādīto id, iegūst tā vērtību un pievieno mainīgajam
+        if (value) {                                                          // Pārbaude vai input laukā vispār tika ievadīta vērtība
+          masivs.push(value);                                                 // Ja ir ievadīta vērtība, tad tā tiek pievienota masīva beigās
+        }                                                                     //
+        render();                                                             // Tiek izsaukta render() funkcija, kas atjauno izprintēto masīvu
       }
-      function nonemt() {
-        if (masivs.length > 0) {
-          masivs.pop();
-        }
-        render();
+      function nonemt() {               // Vērtības noņemšanas no masīva beigām funkcija
+        if (masivs.length > 0) {        // Pārbaude vai masīvā ir vismaz viens elements
+          masivs.pop();                 // Ja ir vismaz viens elements, tad noņem no masīva beigām vienu elementu
+        }                               //
+        render();                       // Tiek izsaukta render() funkcija, kas atjauno izprintēto masīvu
       }
-      function render() {
-        let div = document.getElementById("result");
-        div.innerHTML = JSON.stringify(masivs);
+      function render() {                               // Masīva printēšanas funkcija
+        let div = document.getElementById("result");    // Iegūst HTML elementu ar id 'result' un pievieno to mainīgajam
+        div.innerHTML = JSON.stringify(masivs);         // Atrastajā elementā ievieto masīvu
       }
-      function pievienotAizIndeksa() {
-        let index = Number(document.getElementById("pievienot_indekss").value) + 1;
-        let value = document.getElementById("pievienot_indekss_vertiba").value;
-        if (index <= masivs.length && index >= 0) {
-          masivs.splice(index, 0, value);
-        }
-        render();
+      function pievienotAizIndeksa() {                                                // Vērtības pievienošanas masīvam aiz norādītā indeksa funkcija
+        let index = Number(document.getElementById("pievienot_indekss").value) + 1;   // Iegūst vērtību no ievadlauka ar norādīto id, katram gadījumam to pārvērš par skaitļa tipu un palielina šo vērtību ( +1 ) un pievieno mainīgajam
+        let value = document.getElementById("pievienot_indekss_vertiba").value;       // Iegūst vērtību no ievadlauka ar norādīto id un pievieno mainīgajam
+        if (index <= masivs.length && index >= 0) {                                   // Pārbaude vai indekss ir mazāks vai vienāds ar masīva garumu un vai indekss ir lielāks vai vienāds ar nulli
+          masivs.splice(index, 0, value);                                             // Masīvā tiek izmainīts 'index' elements, šis elements netiek dzēsts ( uz to norāda 0 ), bet gan tiek pievienota tam PRIEKŠĀ jaunā vērtība 'value'
+        }                                                                             // Tāpēc funkcijas sākumā pie iegūtā indeksa tika pieskaitīts +1. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+        render();                                                                     // Tiek izsaukta render() funkcija, kas atjauno izprintēto masīvu
       }
-      function nonemtPecIndeksa() {
-        let index = Number(document.getElementById("nonemt_indekss").value);
-        if (index <= masivs.length && index >= 0) {
-          masivs.splice(index, 1);
-        }
-        render();
+      function nonemtPecIndeksa() {                                                   // Norādītā indeksā esošās vērtības noņemšanas no masīva funkcija
+        let index = Number(document.getElementById("nonemt_indekss").value);          // Iegūst vērtību no ievadlauka ar norādīto id un katram gadījumam to pārvērš par skaitļa tipu un pievieno mainīgajam
+        if (index <= masivs.length && index >= 0) {                                   // Pārbaude vai indekss ir mazāks vai vienāds ar masīva garumu un vai indekss ir lielāks vai vienāds ar nulli
+          masivs.splice(index, 1);                                                    // Masīvā tiek dzēsts index elements, uz ko norāda skaitlis 1.
+        }                                                                             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+        render();                                                                     // Tiek izsaukta render() funkcija, kas atjauno izprintēto masīvu
       }
     </script>
   </head>

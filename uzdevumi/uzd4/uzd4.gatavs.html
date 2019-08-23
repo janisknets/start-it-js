@@ -6,56 +6,58 @@
     <link rel="stylesheet" type="text/css" href="../../styles.css">
     <script type="text/javascript" >
       var rowIndex = 0;
-      function init() {
-        let root = document.getElementById("root");
-        let button = document.createElement("button");
-        let form = document.createElement("form");
-        let div = document.createElement("div");
-        setAttributes(button, {"onClick": "pievienotRindu()", "class": "col-md-5 btn btn-success"});
-        button.innerHTML = "Pievienot rindu";
-        form.setAttribute("id", "forma");
-        div.setAttribute("id", "result");
-        root.appendChild(button);
-        root.appendChild(form);
-        root.appendChild(div);
+      function init() {                                                                                 // Inicializēšanas funkcija, kas pievieno root div elementam jaunu formu un rezultātu div elementu
+        let root = document.getElementById("root");                                                     // Atrod elementu, kuram id ir 'root' un pievieno to mainīgajam
+        let button = document.createElement("button");                                                  // Izveido jaunu pogas elementu un piesaista to mainīgajam
+        let form = document.createElement("form");                                                      // Izveido jaunu formas elementu un piesaista to mainīgajam
+        let div = document.createElement("div");                                                        // Izveido jaunu div elementu un piesaista to mainīgajam
+        setAttributes(button, {"onClick": "pievienotRindu()", "class": "col-md-5 btn btn-success"});    // Izveidotajam pogas elementam pievieno onClick un klases atribūtus, izmantojot zemāk esošo funkciju, kas atvieglo vairāku atribūtu piesaisti vienlaicīgi
+        button.innerHTML = "Pievienot rindu";                                                           // Izveidotajam pogas elementam pievieno tekstu, kas rādīsies uz pogas.
+        form.setAttribute("id", "forma");                                                               // Izveidotajam formas elementam pievieno id atribūtu
+        div.setAttribute("id", "result");                                                               // Izveidotajam div elementam pievieno id atribūtu
+        root.appendChild(button);                                                                       // Root elementam pievieno izveidoto pogas elementu
+        root.appendChild(form);                                                                         // Root elementam pievieno izveidoto formas elementu
+        root.appendChild(div);                                                                          // Root elementam pievieno izveidoto rezultātu div elementu
       }
-      function pievienotRindu() {
-        let form = document.getElementById("forma");
-        let div = document.createElement("div");
-        let input1 = document.createElement("input");
-        let input2 = document.createElement("input");
-        let btn = document.createElement("button");
-        setAttributes(div, {"id": "div-"+rowIndex, "class": "row justify-content-center"});
-        setAttributes(input1, {"type": "text", "name": "atslega", "placeholder": "atslēga", "onchange": "render()", "class":"col-md-4 form-control"});
-        setAttributes(input2, {"type": "text", "name": "vertiba", "placeholder": "vertība", "onchange": "render()", "class":"col-md-4 form-control"});
-        setAttributes(btn, {"type": "button", "onclick": `nonemtRindu("div-${rowIndex}")`, "class":"col-md-3 btn btn-danger"});
-        btn.innerHTML = "Noņemt rindu";
-        div.appendChild(input1);
-        div.appendChild(input2);
-        div.appendChild(btn);
-        form.appendChild(div);
-        render();
-        rowIndex++;
+      function pievienotRindu() {                                             // Jaunas rindas pievienošanas formai funkcija
+        let form = document.getElementById("forma");                          // Atrod elementu, kuram id ir 'forma' un pievieno to mainīgajam
+        let div = document.createElement("div");                              // Izveido jaunu div elementu un piesaista to mainīgajam
+        let input1 = document.createElement("input");                         // Izveido jaunu ievadlauka elementu un piesaista to mainīgajam
+        let input2 = document.createElement("input");                         // Izveido jaunu ievadlauka elementu un piesaista to mainīgajam
+        let btn = document.createElement("button");                           // Izveido jaunu pogas elementu un piesaista to mainīgajam
+        setAttributes(div, {"id": "div-"+rowIndex, "class": "row justify-content-center"});                                                               // Izveidotajam div elementam pievieno klasi un unikālu id atribūtu, izmantojot rowIndex mainīgo
+        setAttributes(input1, {"type": "text", "name": "atslega", "placeholder": "atslēga", "onchange": "render()", "class":"col-md-4 form-control"});    // Ievadlauka elementam pievieno tipu, nosaukumu, placeolder, onchange funkciju un klases
+        setAttributes(input2, {"type": "text", "name": "vertiba", "placeholder": "vertība", "onchange": "render()", "class":"col-md-4 form-control"});    // Ievadlauka elementam pievieno tipu, nosaukumu, placeolder, onchange funkciju un klases
+        setAttributes(btn, {"type": "button", "onclick": `nonemtRindu("div-${rowIndex}")`, "class":"col-md-3 btn btn-danger"});                           // Pogas elementam pievieno tipu 'poga'(lai tas nemēģinātu sūtīt formas datus), onclick funkciju un klases
+        btn.innerHTML = "Noņemt rindu";                                       // Izveidotajam pogas elementam pievieno tekstu, kas rādīsies uz pogas
+        div.appendChild(input1);                                              // Izveidotajam div elementam pievieno pirmo izveidoto ievadlauku
+        div.appendChild(input2);                                              // Izveidotajam div elementam pievieno otro izveidoto ievadlauku
+        div.appendChild(btn);                                                 // Izveidotajam div elementam pievieno izveidoto pogu
+        form.appendChild(div);                                                // Formai pievieno iepriekš izveidoto div elementu ar tam iepriekš pievienotajiem elementiem
+        render();                                                             // Tiek izsaukta render() funkcija, kas atjauno izprintēto objektu
+        rowIndex++;                                                           // Globālais mainīgais rowIndex tiek palielināts par vienu vērtību, lai nodrošinātu unikālus id div elementiem ( rowIndex = rowIndex + 1; ir tas pats, kas rowIndex++; )
       }
-      function nonemtRindu(id) {
-        let div = document.getElementById(id);
-        div.remove();
-        render();
+      function nonemtRindu(id) {                                              // Rindas nonemšanas no formas funkcija, kurai tiek padots 'id', kurš ir viens no iepriekš veidotajiem unikālajiem div elementu id
+        let div = document.getElementById(id);                                // Atrod elementu, kuram id ir funkcijai padotais unikālais id
+        if ( div ) {                                                          // Pārbaude vai eksistē šāds elements, ar norādīto id
+          div.remove();                                                       // Atrastā elementa dzēšana no dokumenta
+        }                                                                     // 
+        render();                                                             // Tiek izsaukta render() funkcija, kas atjauno izprintēto objektu
       }
-      function setAttributes(element, attrs) {
-        for(var key in attrs) {
-          element.setAttribute(key, attrs[key]);
+      function setAttributes(element, attrs) {                                // Funkcija, kas pievieno elementam 'element' norādītos atribūtus 'attrs' (objekts), atvieglojot vairāku atribūtu vienlaicīgu pievienošanu
+        for(var key in attrs) {                                               // Cikls, kurā iziet caur katru 'attrs' objektā esošo atslēgu.   ( "attribūts/atslēga": "vērtība", piemēram, "type": "text" )
+          element.setAttribute(key, attrs[key]);                              // Funkcijai padotajam elementam pievieno attribūtu. 
         }
       }
-      function render() {
-        let keys = Array.prototype.slice.call(document.getElementsByName("atslega"));
-        let values = Array.prototype.slice.call(document.getElementsByName("vertiba"));
-        let div = document.getElementById("result");
-        let object = {};
-        for (let i = 0; i < keys.length; i++) {
-          object[keys[i].value] = values[i].value;
-        }
-        div.innerHTML = JSON.stringify(object);
+      function render() {                                                                   // Objekta printēšanas funkcija
+        let keys = Array.prototype.slice.call(document.getElementsByName("atslega"));       // Pievieno mainīgajam masīvu ar visiem atrastajiem ievadlauku elementiem, kuru nosaukums ir 'atslega'
+        let values = Array.prototype.slice.call(document.getElementsByName("vertiba"));     // Pievieno mainīgajam masīvu ar visiem atrastajiem ievadlauku elementiem, kuru nosaukums ir 'vertiba'
+        let div = document.getElementById("result");                                        // Atrod elementu, kura id ir vienāds ar 'result'
+        let object = {};                                                                    // Izveidojam jaunu objektu, ar nosaukumu 'object'
+        for (let i = 0; i < keys.length; i++) {                                             // Cikls, kurš iziet caur visiem 'keys' masīva elementiem
+          object[keys[i].value] = values[i].value;                                          // Pievieno objektam atslēgu un vērtību no to masīviem atbilstoši cikla iterācijas indeksam
+        }                                                                                   // 
+        div.innerHTML = JSON.stringify(object);                                             // Iepriekš atrastajā div elementā tiek ievietots objekts
       }
     </script>
   </head>

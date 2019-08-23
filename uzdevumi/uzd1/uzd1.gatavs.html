@@ -5,20 +5,20 @@
     <link rel="stylesheet" type="text/css" href="../../styles.css">
     <script type="text/javascript" >
       var i = 0;
-      function palielinat() {
-        i++;
-        setInputValue(i);
+      function palielinat() {     // Funkcija, kas palielina skaitļa vērtību par 1
+        i++;                      // Mainīgajam 'i' tiek palielināta vērtība par 1 ( i++ ir vienāds ar i=i+1 )
+        setInputValue(i);         // Tiek izsaukta funkcija, kas nomaina ievadlauka vērtību uz jauno
       }
-      function samazinat() {
-        if (i <= 0) {
-          i = 0;
-          return;
-        }
-        i--;
-        setInputValue(i);
+      function samazinat() {      // Funkcija, kas samazina skaitļa vērtību par 1
+        if (i <= 0) {             // Pārbaude vai skaitlis ir mazāks vai vienāds ar nulli
+          i = 0;                  // Ja izpildās, tad skaitlis tiek nomainīts uz 0, jo derīgi ir tikai naturāli skaitļi
+          return;                 // Tiek pārtraukta funkcijas darbība, neizpildot tālākos nosacījumus
+        }                         // 
+        i--;                      // Tiek samazināta mainīgā 'i' vērtība par 1 ( i-- ir vienāds ar i=i-1 )
+        setInputValue(i);         // Tiek izsaukta funkcija, kas nomaina ievadlauka vērtību uz jauno
       }
-      function setInputValue(val) {
-        document.getElementById('vertiba').value = val
+      function setInputValue(val) {                       // Funkcija, kas ievieto tai padoto vērtību 'val' ievadlaukā
+        document.getElementById('vertiba').value = val    // Atrod elementu ar id 'vertiba' un tās vērtību nomaina uz funkcijai padoto 'val' vērtību
       }
     </script>
   </head>

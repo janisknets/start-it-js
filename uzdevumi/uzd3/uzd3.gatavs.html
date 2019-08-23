@@ -6,31 +6,31 @@
     <link rel="stylesheet" type="text/css" href="../../styles.css">
     <script type="text/javascript" >
       var objekts = {};
-      function init() {
-        let root = document.getElementById("root");
-        let div = document.createElement("DIV");
-        div.setAttribute("id", "result");
-        div.innerHTML = JSON.stringify(objekts);
-        root.appendChild(div);
+      function init() {                                 // Inicializēšanas funkcija, kas pievieno root div elementam jaunu rezultātu div elementu
+        let root = document.getElementById("root");     // Atrod elementu, kuram id ir 'root' un pievieno to mainīgajam
+        let div = document.createElement("DIV");        // Izveido jaunu div elementu un piesaista to mainīgajam
+        div.setAttribute("id", "result");               // Iepriekš izveidotajam div elementam pievieno id atribūtu 'result'
+        div.innerHTML = JSON.stringify(objekts);        // Iepriekš izveidotajā div elementā ievieto masīvu
+        root.appendChild(div);                          // Pievieno iepriekš izveidoto div elementu, iepriekš atrastajam 'root' elementam
       }
-      function render() {
-        let div = document.getElementById("result");
-        div.innerHTML = JSON.stringify(objekts);
+      function render() {                               // Objekta printēšanas funkcija
+        let div = document.getElementById("result");    // Iegūst HTML elementu ar id 'result' un pievieno to mainīgajam
+        div.innerHTML = JSON.stringify(objekts);        // Atrastajā elementā ievieto objektu
       }
-      function pievienot() {
-        let key = document.getElementById("pievienot_atslega").value;
-        let value = document.getElementById("pievienot_vertiba").value;
-        if (!objekts[key] && key && value) {
-          objekts[key] = value;
-        }
-        render();
+      function pievienot() {                                                // Atslēgas un vērtības pievienošanas objektam funkcija
+        let key = document.getElementById("pievienot_atslega").value;       // Iegūst vērtību no ievadlauka ar norādīto id un pievieno to mainīgajam
+        let value = document.getElementById("pievienot_vertiba").value;     // Iegūst vērtību no ievadlauka ar norādīto id un pievieno to mainīgajam
+        if (!objekts[key] && key && value) {                                // Pārbaude vai objektā jau neeksistē norādītā atslēga un vai ievadlaukos tika ievadīta atslēga un vērtība
+          objekts[key] = value;                                             // Objektam tiek pievienota jauna atslēga un atiecīgi tai, jauna vērtība
+        }                                                                   //
+        render();                                                           // Tiek izsaukta render() funkcija, kas atjauno izprintēto objektu
       }
-      function nonemt() {
-        let key = document.getElementById("nonemt_atslega").value;
-        if (objekts[key]) {
-          delete objekts[key];
-        }
-        render();
+      function nonemt() {                                                   // Atslēgas un tās vērtības dzēšanas no objekta funkcija
+        let key = document.getElementById("nonemt_atslega").value;          // Iegūst vērtību no ievadlauka ar norādīto id un pievienot to mainīgajam
+        if (objekts[key]) {                                                 // Pārbaude vai objektā pastāv norādītā atslēga
+          delete objekts[key];                                              // No objekta tiek dzēsta norādītā atslēga un tās vērtība
+        }                                                                   //
+        render();                                                           // Tiek izsaukta render() funkcija, kas atjauno izprintēto objektu
       }
     </script>
   </head>
